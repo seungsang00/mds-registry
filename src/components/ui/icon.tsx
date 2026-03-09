@@ -1,5 +1,23 @@
 import { type ComponentType, type SVGProps, forwardRef } from "react";
 import {
+  CustomCards,
+  CustomCardsStar,
+  CustomSearchImage,
+  CustomSearchTrend,
+  CustomSearchEarth,
+  CustomInProgress,
+  CustomInProgressWOStar,
+  CustomCompareImage,
+  CustomClusterHubSellerIntel,
+  CustomThreads,
+  CustomWhatsapp,
+  CustomMessenger,
+  CustomAudienceNetwork,
+  CustomEth,
+  CustomShapeArrow,
+  CustomFormulaComponent,
+} from "./icon-custom";
+import {
   ArrowLeft,
   ArrowRight,
   ArrowUp,
@@ -20,7 +38,6 @@ import {
   Eye,
   LayoutGrid as Cards,
   Star as CardsStar,
-  EyeOff,
   Trash2,
   Star,
   Lightbulb,
@@ -222,7 +239,6 @@ type IconName =
   | "View"
   | "Cards"
   | "CardsStar"
-  | "EyesVisibility"
   | "Trash"
   | "Star"
   | "Tips"
@@ -429,9 +445,8 @@ const iconMap: Record<IconName, ComponentType<SVGProps<SVGSVGElement>>> = {
   Send,
   HourglassDelay: Hourglass,
   View: Eye,
-  Cards,
-  CardsStar,
-  EyesVisibility: EyeOff,
+  Cards: CustomCards,
+  CardsStar: CustomCardsStar,
   Trash: Trash2,
   Star,
   Tips: Lightbulb,
@@ -478,9 +493,9 @@ const iconMap: Record<IconName, ComponentType<SVGProps<SVGSVGElement>>> = {
   TriangleDown,
   TriangleUp,
   Search,
-  SearchImage: SearchX,
-  SearchTrend,
-  SearchEarth,
+  SearchImage: CustomSearchImage,
+  SearchTrend: CustomSearchTrend,
+  SearchEarth: CustomSearchEarth,
   SeeDetails: ScanSearch,
   Edit: Pencil,
   Download,
@@ -497,8 +512,8 @@ const iconMap: Record<IconName, ComponentType<SVGProps<SVGSVGElement>>> = {
   Groups: Users,
   LinkUrl: Link2,
   Task: ClipboardCheck,
-  InProgress: CircleDotDashed,
-  InProgressWOStar: CircleDot,
+  InProgress: CustomInProgress,
+  InProgressWOStar: CustomInProgressWOStar,
   Sell: Tag,
   Magic: Sparkles,
   SuperBolt: Zap,
@@ -517,14 +532,14 @@ const iconMap: Record<IconName, ComponentType<SVGProps<SVGSVGElement>>> = {
   ChartNumber,
   AutoMagic: Wand2,
   ChartMonitoring: MonitorDot,
-  CompareImage: ImageIcon,
+  CompareImage: CustomCompareImage,
   ProtectionWarning: ShieldAlert,
   Image: ImageIcon,
   Images,
   Pdf: FileText,
   ChartBar,
   Lock,
-  ClusterHubSellerIntel: Server,
+  ClusterHubSellerIntel: CustomClusterHubSellerIntel,
   Email: Mail,
   NoEmail: MailX,
   Celebration: PartyPopper,
@@ -575,11 +590,11 @@ const iconMap: Record<IconName, ComponentType<SVGProps<SVGSVGElement>>> = {
   GenerativeAI: Bot,
   Ads: Megaphone,
   Facebook,
-  Threads: AtSign,
+  Threads: CustomThreads,
   Instagram,
-  Whatsapp,
-  Messenger,
-  AudienceNetwork,
+  Whatsapp: CustomWhatsapp,
+  Messenger: CustomMessenger,
+  AudienceNetwork: CustomAudienceNetwork,
   Equalizer: SlidersHorizontal,
 
   // Editor
@@ -606,9 +621,9 @@ const iconMap: Record<IconName, ComponentType<SVGProps<SVGSVGElement>>> = {
   Rectangle,
   Triangle,
   Line,
-  ShapeArrow: MoveRight,
-  FormulaComponent: Sigma,
-  Eth: Blend,
+  ShapeArrow: CustomShapeArrow,
+  FormulaComponent: CustomFormulaComponent,
+  Eth: CustomEth,
   ZoomIn,
 };
 
@@ -678,7 +693,7 @@ const iconCategories = {
   symbols: [
     "Check", "AddPlus", "Minus", "CloseDelete", "Flag", "Help",
     "ErrorWarning", "Priority", "Info", "Send", "HourglassDelay",
-    "View", "Cards", "CardsStar", "EyesVisibility", "Trash", "Star",
+    "View", "Cards", "CardsStar", "Trash", "Star",
     "Tips", "Verified", "Folder", "Label", "More", "Notifications",
     "NotificationsOn", "NotificationsOff", "Settings", "AccountProfile",
     "StoreMarket", "Home", "Language", "Apps", "Menu", "MenuClose",
