@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "@/lib/utils"
 
 const TOGGLE_CONFIG = {
   small: {
@@ -10,7 +9,8 @@ const TOGGLE_CONFIG = {
     thumbSize: 16,
     activeLeft: 8,
     iconSize: 10,
-    labelClass: "text-xs",
+    gap: 2,
+    fontSize: 12,
   },
   medium: {
     width: 32,
@@ -18,9 +18,19 @@ const TOGGLE_CONFIG = {
     thumbSize: 20,
     activeLeft: 12,
     iconSize: 12,
-    labelClass: "text-sm",
+    gap: 4,
+    fontSize: 14,
   },
 } as const
+
+const COLORS = {
+  track: {
+    on: { normal: "#1648d2", hover: "#1f3f99", disabled: "#a3b9f5" },
+    off: { normal: "#c4cdd5", hover: "#aab5c0", disabled: "#eaedf0" },
+  },
+  thumb: "#ffffff",
+  label: "#212b36",
+}
 
 type MDSToggleProps = {
   value: boolean
@@ -33,6 +43,7 @@ type MDSToggleProps = {
 const MDSToggle = React.forwardRef<HTMLLabelElement, MDSToggleProps>(
   ({ value, size = "medium", onChange, isDisabled = false, label }, ref) => {
     const config = TOGGLE_CONFIG[size]
+    const [hovered, setHovered] = React.useState(false)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (!isDisabled && onChange) {
@@ -40,66 +51,69 @@ const MDSToggle = React.forwardRef<HTMLLabelElement, MDSToggleProps>(
       }
     }
 
-    const trackColor = value
-      ? isDisabled
-        ? "var(--mds-bg-fill-primary-default-disabled)"
-        : "var(--mds-bg-fill-primary-default-normal)"
-      : isDisabled
-        ? "var(--mds-bg-fill-neutral-weak-disabled)"
-        : "var(--mds-bg-fill-neutral-weak-normal)"
-
-    const hoverTrackColor = isDisabled
-      ? trackColor
-      : value
-        ? "var(--mds-bg-fill-primary-default-hover)"
-        : "var(--mds-bg-fill-neutral-weak-hover)"
+    const colors = value ? COLORS.track.on : COLORS.track.off
+    const trackColor = isDisabled
+      ? colors.disabled
+      : hovered
+        ? colors.hover
+        : colors.normal
 
     return (
       <label
         ref={ref}
-        className={cn(
-          "group inline-flex items-center p-0.5",
-          size === "medium" ? "gap-1" : "gap-0.5",
-          isDisabled ? "cursor-default" : "cursor-pointer"
-        )}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: config.gap,
+          padding: 2,
+          cursor: isDisabled ? "default" : "pointer",
+        }}
         onClick={(e) => e.stopPropagation()}
-        style={
-          {
-            "--toggle-track": trackColor,
-            "--toggle-track-hover": hoverTrackColor,
-          } as React.CSSProperties
-        }
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         <input
           type="checkbox"
-          className="hidden"
+          style={{ display: "none" }}
           checked={value}
           disabled={isDisabled}
           onChange={handleChange}
         />
         <div
-          className={cn(
-            "relative rounded-[10px] transition-colors duration-150",
-            "bg-[var(--toggle-track)]",
-            !isDisabled && "group-hover:bg-[var(--toggle-track-hover)]"
-          )}
-          style={{ width: config.width, height: config.height }}
+          style={{
+            position: "relative",
+            width: config.width,
+            height: config.height,
+            borderRadius: 10,
+            backgroundColor: trackColor,
+            transition: "background-color 0.15s ease",
+          }}
         >
           <div
-            className="absolute left-0 top-0 flex items-center justify-center rounded-full transition-transform duration-150"
             style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
               width: config.thumbSize,
               height: config.thumbSize,
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               transform: `translateX(${value ? config.activeLeft : 0}px)`,
-              transitionTimingFunction: "cubic-bezier(0.175, 0.885, 0.32, 1.37)",
-              color: "var(--mds-bg-fill-inverse-default-normal)",
+              transition: "transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.37)",
+              color: COLORS.thumb,
             }}
           >
             <div
-              className={cn(
-                "absolute flex items-center justify-center transition-opacity duration-150",
-                value ? "opacity-100" : "opacity-0"
-              )}
+              style={{
+                position: "absolute",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                opacity: value ? 1 : 0,
+                transition: "opacity 0.15s ease",
+              }}
             >
               <svg
                 width={config.iconSize}
@@ -115,10 +129,14 @@ const MDSToggle = React.forwardRef<HTMLLabelElement, MDSToggleProps>(
               </svg>
             </div>
             <div
-              className={cn(
-                "absolute flex items-center justify-center transition-opacity duration-150",
-                !value ? "opacity-100" : "opacity-0"
-              )}
+              style={{
+                position: "absolute",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                opacity: value ? 0 : 1,
+                transition: "opacity 0.15s ease",
+              }}
             >
               <svg
                 width={config.iconSize}
@@ -136,12 +154,7 @@ const MDSToggle = React.forwardRef<HTMLLabelElement, MDSToggleProps>(
           </div>
         </div>
         {label && (
-          <span
-            className={cn(
-              config.labelClass,
-              "text-[var(--mds-content-neutral-default-normal)]"
-            )}
-          >
+          <span style={{ fontSize: config.fontSize, color: COLORS.label }}>
             {label}
           </span>
         )}
