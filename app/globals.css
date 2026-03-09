@@ -112,6 +112,221 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* ===== MDS Design System Color Tokens ===== */
+:root {
+  /* Background Fill - Neutral */
+  --mds-bg-fill-neutral-default-normal: #ffffff;
+  --mds-bg-fill-neutral-default-hover: #f1f4f6;
+  --mds-bg-fill-neutral-default-completed: #f9fafb;
+  --mds-bg-fill-neutral-default-disabled: #ffffff;
+  --mds-bg-fill-neutral-tint-normal: #eaedf0;
+  --mds-bg-fill-neutral-tint-hover: #c4cdd5;
+  --mds-bg-fill-neutral-tint-completed: #dfe3e8;
+  --mds-bg-fill-neutral-tint-disabled: #eaedf0;
+  --mds-bg-fill-neutral-strong-normal: #637381;
+  --mds-bg-fill-neutral-strong-hover: #454f5b;
+  --mds-bg-fill-neutral-strong-completed: #dfe3e8;
+  --mds-bg-fill-neutral-strong-disabled: #c4cdd5;
+  --mds-bg-fill-neutral-weak-normal: #c4cdd5;
+  --mds-bg-fill-neutral-weak-hover: #aab5c0;
+  --mds-bg-fill-neutral-weak-disabled: #eaedf0;
+
+  /* Background Fill - Primary */
+  --mds-bg-fill-primary-default-normal: #1648d2;
+  --mds-bg-fill-primary-default-hover: #1f3f99;
+  --mds-bg-fill-primary-default-completed: #dfe3e8;
+  --mds-bg-fill-primary-default-disabled: #a3b9f5;
+  --mds-bg-fill-primary-tint-normal: #e9eefd;
+  --mds-bg-fill-primary-tint-hover: #c0cff8;
+  --mds-bg-fill-primary-tint-completed: #dfe3e8;
+  --mds-bg-fill-primary-tint-disabled: #e9eefd;
+
+  /* Background Fill - Critical */
+  --mds-bg-fill-critical-default-normal: #e12705;
+  --mds-bg-fill-critical-default-hover: #cb1400;
+  --mds-bg-fill-critical-default-completed: #dfe3e8;
+  --mds-bg-fill-critical-default-disabled: #f2a091;
+  --mds-bg-fill-critical-tint-normal: #fce9e6;
+  --mds-bg-fill-critical-tint-hover: #f6beb4;
+  --mds-bg-fill-critical-tint-completed: #dfe3e8;
+  --mds-bg-fill-critical-tint-disabled: #fce9e6;
+
+  /* Background Fill - Success */
+  --mds-bg-fill-success-default-normal: #00ad00;
+  --mds-bg-fill-success-default-hover: #008000;
+  --mds-bg-fill-success-default-completed: #dfe3e8;
+  --mds-bg-fill-success-default-disabled: #8fdc8f;
+  --mds-bg-fill-success-tint-normal: #e5f7e5;
+  --mds-bg-fill-success-tint-hover: #b2e7b2;
+  --mds-bg-fill-success-tint-completed: #dfe3e8;
+  --mds-bg-fill-success-tint-disabled: #e5f7e5;
+
+  /* Background Fill - Warning */
+  --mds-bg-fill-warning-default-normal: #ca8402;
+  --mds-bg-fill-warning-default-hover: #9b6500;
+  --mds-bg-fill-warning-default-completed: #dfe3e8;
+  --mds-bg-fill-warning-default-disabled: #ffcb6c;
+  --mds-bg-fill-warning-tint-normal: #fff3dc;
+  --mds-bg-fill-warning-tint-hover: #ffda95;
+  --mds-bg-fill-warning-tint-completed: #dfe3e8;
+  --mds-bg-fill-warning-tint-disabled: #fff3dc;
+
+  /* Background Fill - Teal */
+  --mds-bg-fill-teal-default-normal: #049eb8;
+  --mds-bg-fill-teal-default-hover: #037e93;
+  --mds-bg-fill-teal-default-completed: #dfe3e8;
+  --mds-bg-fill-teal-default-disabled: #91d5e0;
+  --mds-bg-fill-teal-tint-normal: #e5f5f7;
+  --mds-bg-fill-teal-tint-hover: #b3e1e9;
+  --mds-bg-fill-teal-tint-completed: #dfe3e8;
+  --mds-bg-fill-teal-tint-disabled: #e5f5f7;
+
+  /* Background Fill - Purple */
+  --mds-bg-fill-purple-default-normal: #9700b0;
+  --mds-bg-fill-purple-default-hover: #78008c;
+  --mds-bg-fill-purple-default-completed: #dfe3e8;
+  --mds-bg-fill-purple-default-disabled: #d18fdc;
+  --mds-bg-fill-purple-tint-normal: #f4e5f7;
+  --mds-bg-fill-purple-tint-hover: #dfb2e7;
+  --mds-bg-fill-purple-tint-completed: #dfe3e8;
+  --mds-bg-fill-purple-tint-disabled: #f4e5f7;
+
+  /* Background Fill - Inverse */
+  --mds-bg-fill-inverse-primary: #7aacff;
+  --mds-bg-fill-inverse-default-normal: #ffffff;
+  --mds-bg-fill-inverse-default-hover: #dfe3e8;
+  --mds-bg-fill-inverse-default-completed: #dfe3e8;
+  --mds-bg-fill-inverse-default-disabled: rgba(255, 255, 255, 0.4);
+  --mds-bg-fill-inverse-tint-normal: rgba(255, 255, 255, 0.2);
+  --mds-bg-fill-inverse-tint-hover: rgba(255, 255, 255, 0.3);
+  --mds-bg-fill-inverse-tint-completed: #dfe3e8;
+  --mds-bg-fill-inverse-tint-disabled: rgba(255, 255, 255, 0.2);
+  --mds-bg-fill-target-default: rgba(0, 0, 0, 0.05);
+
+  /* Background Surface - Neutral */
+  --mds-bg-surface-neutral-default-normal: #ffffff;
+  --mds-bg-surface-neutral-default-hover: #f1f4f6;
+  --mds-bg-surface-neutral-default-disabled: #ffffff;
+  --mds-bg-surface-neutral-secondary-normal: #f9fafb;
+  --mds-bg-surface-neutral-secondary-hover: #eaedf0;
+  --mds-bg-surface-neutral-secondary-disabled: #f9fafb;
+  --mds-bg-surface-neutral-tertiary-normal: #f1f4f6;
+  --mds-bg-surface-neutral-tertiary-hover: #dfe3e8;
+
+  /* Background Surface - Semantic */
+  --mds-bg-surface-primary-default-normal: #e9eefd;
+  --mds-bg-surface-primary-default-hover: #c0cff8;
+  --mds-bg-surface-primary-default-disabled: #e9eefd;
+  --mds-bg-surface-critical-default-normal: #fce9e6;
+  --mds-bg-surface-critical-default-hover: #f6beb4;
+  --mds-bg-surface-critical-default-disabled: #fce9e6;
+  --mds-bg-surface-success-default-normal: #e5f7e5;
+  --mds-bg-surface-success-default-hover: #b2e7b2;
+  --mds-bg-surface-success-default-disabled: #e5f7e5;
+  --mds-bg-surface-warning-default-normal: #fff3dc;
+  --mds-bg-surface-warning-default-hover: #ffda95;
+  --mds-bg-surface-warning-default-disabled: #fff3dc;
+  --mds-bg-surface-teal-default-normal: #e5f5f7;
+  --mds-bg-surface-teal-default-hover: #b3e1e9;
+  --mds-bg-surface-teal-default-disabled: #e5f5f7;
+  --mds-bg-surface-purple-default-normal: #f4e5f7;
+  --mds-bg-surface-purple-default-hover: #dfb2e7;
+  --mds-bg-surface-purple-default-disabled: #f4e5f7;
+  --mds-bg-surface-inverse-light: #212b36;
+  --mds-bg-surface-inverse-dark: #161c24;
+  --mds-bg-surface-selected-default-normal: #e9eefd;
+  --mds-bg-surface-selected-default-hover: #c0cff8;
+
+  /* Content */
+  --mds-content-on-default-color: #ffffff;
+  --mds-content-placeholder-normal: #aab5c0;
+  --mds-content-neutral-default-normal: #212b36;
+  --mds-content-neutral-default-hover: #161c24;
+  --mds-content-neutral-default-completed: #768695;
+  --mds-content-neutral-default-disabled: #c4cdd5;
+  --mds-content-neutral-secondary-normal: #637381;
+  --mds-content-neutral-secondary-hover: #454f5b;
+  --mds-content-neutral-secondary-disabled: #c4cdd5;
+  --mds-content-neutral-tertiary-normal: #aab5c0;
+  --mds-content-neutral-tertiary-hover: #919eab;
+  --mds-content-neutral-tertiary-disabled: #c4cdd5;
+  --mds-content-primary-default-normal: #1648d2;
+  --mds-content-primary-default-hover: #1f3f99;
+  --mds-content-primary-default-completed: #768695;
+  --mds-content-primary-default-disabled: #a3b9f5;
+  --mds-content-critical-default-normal: #cb1400;
+  --mds-content-critical-default-hover: #871703;
+  --mds-content-critical-default-completed: #768695;
+  --mds-content-critical-default-disabled: #f2a091;
+  --mds-content-success-default-normal: #008000;
+  --mds-content-success-default-hover: #1c5e20;
+  --mds-content-success-default-completed: #768695;
+  --mds-content-success-default-disabled: #8fdc8f;
+  --mds-content-warning-default-normal: #9b6500;
+  --mds-content-warning-default-hover: #6a4300;
+  --mds-content-warning-default-completed: #768695;
+  --mds-content-warning-default-disabled: #ffcb6c;
+  --mds-content-teal-default-normal: #037e93;
+  --mds-content-teal-default-hover: #025e6e;
+  --mds-content-teal-default-completed: #768695;
+  --mds-content-teal-default-disabled: #91d5e0;
+  --mds-content-purple-default-normal: #78008c;
+  --mds-content-purple-default-hover: #5a0069;
+  --mds-content-purple-default-completed: #768695;
+  --mds-content-purple-default-disabled: #d18fdc;
+  --mds-content-inverse-default-normal: #ffffff;
+  --mds-content-inverse-default-hover: #f1f4f6;
+  --mds-content-inverse-default-completed: #aab5c0;
+  --mds-content-inverse-default-disabled: rgba(255, 255, 255, 0.4);
+  --mds-content-inverse-primary: #7aacff;
+  --mds-content-selected-default-normal: #1648d2;
+  --mds-content-selected-default-hover: #1f3f99;
+
+  /* Border */
+  --mds-border-neutral-default-normal: #dfe3e8;
+  --mds-border-neutral-default-hover: #dfe3e8;
+  --mds-border-neutral-default-completed: #dfe3e8;
+  --mds-border-neutral-default-disabled: #eaedf0;
+  --mds-border-neutral-strong-normal: #c4cdd5;
+  --mds-border-neutral-weak-normal: #eaedf0;
+  --mds-border-primary-weak-normal: #dfe3e8;
+  --mds-border-primary-weak-hover: #dfe3e8;
+  --mds-border-primary-weak-completed: #dfe3e8;
+  --mds-border-primary-weak-disabled: #eaedf0;
+  --mds-border-primary-default-normal: #1648d2;
+  --mds-border-primary-default-hover: #1f3f99;
+  --mds-border-primary-default-completed: #768695;
+  --mds-border-primary-default-disabled: #a3b9f5;
+  --mds-border-critical-default-normal: #cb1400;
+  --mds-border-critical-default-hover: #871703;
+  --mds-border-critical-default-completed: #768695;
+  --mds-border-critical-default-disabled: #f2a091;
+  --mds-border-success-default-normal: #008000;
+  --mds-border-success-default-hover: #1c5e20;
+  --mds-border-success-default-completed: #768695;
+  --mds-border-success-default-disabled: #8fdc8f;
+  --mds-border-warning-default-normal: #ca8402;
+  --mds-border-warning-default-hover: #9b6500;
+  --mds-border-warning-default-completed: #768695;
+  --mds-border-warning-default-disabled: #ffcb6c;
+  --mds-border-teal-default-normal: #037e93;
+  --mds-border-teal-default-hover: #025e6e;
+  --mds-border-teal-default-completed: #dfe3e8;
+  --mds-border-teal-default-disabled: #91d5e0;
+  --mds-border-purple-default-normal: #78008c;
+  --mds-border-purple-default-hover: #5a0069;
+  --mds-border-purple-default-completed: #768695;
+  --mds-border-purple-default-disabled: #d18fdc;
+  --mds-border-inverse-default-normal: #ffffff;
+  --mds-border-inverse-default-hover: #ffffff;
+  --mds-border-inverse-default-disabled: #aab5c0;
+  --mds-border-inverse-primary-normal: #7aacff;
+  --mds-border-selected-default-normal: #1648d2;
+  --mds-border-selected-default-hover: #1f3f99;
+  --mds-border-target-default: rgba(0, 0, 0, 0.1);
+  --mds-border-target-ai: #d4c7f0;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
