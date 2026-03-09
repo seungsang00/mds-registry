@@ -6,7 +6,9 @@ export const brandSidebar = {
   components: {
     Default: (
       <SidebarProvider>
-        <BrandSidebar />
+        <div className="relative flex min-h-[400px]">
+          <BrandSidebar />
+        </div>
       </SidebarProvider>
     ),
   },
