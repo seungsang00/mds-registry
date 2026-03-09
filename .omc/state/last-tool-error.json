@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"which vercel 2>&1 || npm list -g vercel 2>&1\",\"description\":\"Check if Vercel CLI is installed\"}",
+  "error": "Exit code 1\nvercel not found\n/usr/local/lib\n└── (empty)",
+  "timestamp": "2026-03-09T04:33:40.276Z",
+  "retry_count": 1
+}

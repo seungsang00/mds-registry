@@ -1,6 +1,6 @@
 "use client"
 
-import { cn } from "@/lib/utils"
+import * as React from "react"
 
 type LogoType = "vision" | "ai" | "folio"
 type LogoColor = "white" | "black"
@@ -28,22 +28,20 @@ function SvgWrapper({
   color,
   viewBox,
   children,
-  className,
 }: {
   size: number
   color: LogoColor
   viewBox: string
   children: React.ReactNode
-  className?: string
 }) {
   return (
     <svg
       viewBox={viewBox}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("h-auto", className)}
       style={{
         height: size,
+        width: "auto",
         color: color === "white" ? "#ffffff" : "#000000",
       }}
     >
