@@ -63,6 +63,7 @@ import { textarea } from "@/app/demo/[name]/ui/textarea";
 import { toggle } from "@/app/demo/[name]/ui/toggle";
 import { toggleGroup } from "@/app/demo/[name]/ui/toggle-group";
 import { tooltip } from "@/app/demo/[name]/ui/tooltip";
+import { icon } from "@/app/demo/[name]/ui/mds-icon";
 
 interface Demo {
   name: string; // this must match the `registry.json` name
@@ -135,4 +136,5 @@ export const demos: { [name: string]: Demo } = {
   toggle,
   "toggle-group": toggleGroup,
   tooltip,
+  icon,
 };
