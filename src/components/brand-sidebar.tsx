@@ -1,185 +1,248 @@
 "use client";
 
 import {
-  AlertTriangle,
   BarChart2,
-  Clock,
-  Database,
+  BookOpen,
+  ChevronDown,
+  Globe,
   Home,
-  LayoutGrid,
-  MessageSquareText,
-  MoreHorizontal,
-  Plus,
-  Table,
+  Link2,
+  ListChecks,
+  Lock,
+  Megaphone,
+  Puzzle,
+  Settings,
+  Share2,
+  ShoppingBag,
+  SlidersHorizontal,
+  TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type * as React from "react";
 
-import { Button } from "@/components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarHeader,
+  SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarSeparator,
-  useSidebar,
 } from "@/components/ui/sidebar";
-import { cn } from "@/lib/utils";
 
-interface NavItem {
-  title: string;
-  href: string;
-  icon: React.ReactNode;
-  badge?: {
-    text: string;
-  };
-}
-
-interface SidebarProps {
-  collapsed?: boolean;
-  onToggle?: () => void;
-  className?: string;
-}
-
-export function BrandSidebar({
-  collapsed = false,
-  onToggle,
-  className,
-}: SidebarProps) {
+export function BrandSidebar() {
   const pathname = usePathname();
-  const { state } = useSidebar();
-  const isCollapsed = state === "collapsed";
-
-  const mainNavItems: NavItem[] = [
-    {
-      title: "Home",
-      href: "#",
-      icon: <Home className="size-4" />,
-    },
-    {
-      title: "Projects",
-      href: "#projects",
-      icon: <LayoutGrid className="size-4" />,
-    },
-    {
-      title: "Databases",
-      href: "#databases",
-      icon: <Database className="size-4" />,
-    },
-    {
-      title: "Tables",
-      href: "#tables",
-      icon: <Table className="size-4" />,
-      badge: {
-        text: "Beta",
-      },
-    },
-    {
-      title: "AI",
-      href: "#ai",
-      icon: <MessageSquareText className="size-4" />,
-      badge: {
-        text: "Alpha",
-      },
-    },
-  ];
-
-  const toolsNavItems: NavItem[] = [
-    {
-      title: "Alerts",
-      href: "#alerts",
-      icon: <AlertTriangle className="size-4" />,
-    },
-    {
-      title: "Analytics",
-      href: "#analytics",
-      icon: <BarChart2 className="size-4" />,
-    },
-    {
-      title: "History",
-      href: "#history",
-      icon: <Clock className="size-4" />,
-    },
-    {
-      title: "More",
-      href: "#more",
-      icon: <MoreHorizontal className="size-4" />,
-    },
-  ];
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon" className="mt-16">
-      <SidebarHeader>
-        <div className={cn(isCollapsed ? "py-2" : "p-2")}>
-          <Button className={cn(isCollapsed ? "h-8 w-8 p-0" : "w-full")}>
-            <Plus className={cn("size-4", !isCollapsed && "mr-1")} />
-            {!isCollapsed && <span>Create</span>}
-          </Button>
-        </div>
-      </SidebarHeader>
-
+    <Sidebar variant="sidebar" collapsible="icon" className="!top-16 !h-[calc(100svh-4rem)] [&_[data-slot=sidebar-inner]]:bg-background [&_[data-active=true]]:bg-foreground/10">
       <SidebarContent>
-        {/* Main Nav Items */}
+        {/* Main */}
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {mainNavItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={
-                      pathname === item.href ||
-                      (pathname === "" && item.href === "/")
-                    }
-                    tooltip={item.title}
-                  >
-                    <Link href={item.href}>
-                      {item.icon}
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                  {item.badge && (
-                    <SidebarMenuBadge>{item.badge.text}</SidebarMenuBadge>
-                  )}
-                </SidebarMenuItem>
-              ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={pathname === "#"} tooltip="Home">
+                  <Link href="#">
+                    <Home className="size-4" />
+                    <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Analytics">
+                  <Link href="#analytics">
+                    <BarChart2 className="size-4" />
+                    <span>Analytics</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Brand Configuration">
+                  <Link href="#brand-configuration">
+                    <SlidersHorizontal className="size-4" />
+                    <span>Brand Configuration</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
         <SidebarSeparator />
 
-        {/* Tools Nav Items */}
+        {/* Channels */}
         <SidebarGroup>
+          <SidebarGroupLabel>Channels</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {toolsNavItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href}
-                    tooltip={item.title}
-                  >
-                    <Link href={item.href}>
-                      {item.icon}
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                  {item.badge && (
-                    <SidebarMenuBadge>{item.badge.text}</SidebarMenuBadge>
-                  )}
+              <Collapsible className="group/collapsible">
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton tooltip="Marketplace">
+                      <ShoppingBag className="size-4" />
+                      <span>Marketplace</span>
+                      <ChevronDown className="ml-auto size-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild>
+                          <Link href="#marketplace-listings">
+                            <ListChecks className="size-3.5" />
+                            <span>Listings</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild>
+                          <Link href="#marketplace-review">
+                            <span className="flex size-3.5 items-center justify-center">
+                              <span className="size-3 rounded-full border-2 border-current" />
+                            </span>
+                            <span>Review Needed</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
                 </SidebarMenuItem>
-              ))}
+              </Collapsible>
+
+              <Collapsible className="group/collapsible">
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton tooltip="Social Media">
+                      <Share2 className="size-4" />
+                      <span>Social Media</span>
+                      <ChevronDown className="ml-auto size-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild>
+                          <Link href="#social-listings">
+                            <ListChecks className="size-3.5" />
+                            <span>Listings</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                      <SidebarMenuSubItem>
+                        <SidebarMenuSubButton asChild>
+                          <Link href="#social-review">
+                            <span className="flex size-3.5 items-center justify-center">
+                              <span className="size-3 rounded-full border-2 border-current" />
+                            </span>
+                            <span>Review Needed</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Website Content">
+                  <Link href="#website-content">
+                    <Globe className="size-4" />
+                    <span>Website Content</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Domain Names">
+                  <Link href="#domain-names">
+                    <Link2 className="size-4" />
+                    <span>Domain Names</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Paid Ads">
+                  <Link href="#paid-ads">
+                    <Megaphone className="size-4" />
+                    <span>Paid Ads</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarSeparator />
+
+        {/* Intelligence */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Intelligence</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Price Monitoring" className="text-muted-foreground">
+                  <Link href="#price-monitoring">
+                    <TrendingUp className="size-4" />
+                    <span>Price Monitoring</span>
+                    <Lock className="ml-auto size-3.5" />
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Risk Intelligence" className="text-muted-foreground">
+                  <Link href="#risk-intelligence">
+                    <span className="flex size-4 items-center justify-center">
+                      <span className="size-3 rounded-full border-2 border-current" />
+                    </span>
+                    <span>Risk Intelligence</span>
+                    <Lock className="ml-auto size-3.5" />
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      {/* Footer */}
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Documentation">
+              <Link href="#documentation">
+                <BookOpen className="size-4" />
+                <span>Documentation</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Integrations">
+              <Link href="#integrations">
+                <Puzzle className="size-4" />
+                <span>Integrations</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Settings">
+              <Link href="#settings">
+                <Settings className="size-4" />
+                <span>Settings</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }
