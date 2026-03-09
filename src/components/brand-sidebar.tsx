@@ -1,5 +1,6 @@
 "use client";
 
+import type { LucideIcon } from "lucide-react";
 import {
   BarChart2,
   BookOpen,
@@ -19,6 +20,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { ReactNode } from "react";
 
 import {
   Collapsible,
@@ -45,11 +47,81 @@ interface BrandSidebarProps {
   basePath?: string;
 }
 
+function NavItem({
+  path,
+  icon: Icon,
+  label,
+  locked,
+  suffix,
+  basePath,
+  pathname,
+}: {
+  path: string;
+  icon: LucideIcon | (() => ReactNode);
+  label: string;
+  locked?: boolean;
+  suffix?: ReactNode;
+  basePath: string;
+  pathname: string;
+}) {
+  const fullHref = path === "/" ? basePath || "/" : `${basePath}${path}`;
+  const active = pathname === fullHref;
+
+  return (
+    <SidebarMenuItem>
+      <SidebarMenuButton
+        asChild
+        isActive={active}
+        tooltip={label}
+        className={locked ? "text-muted-foreground" : undefined}
+      >
+        <Link href={fullHref}>
+          {"render" in Icon ? <Icon className="size-4" /> : (Icon as () => ReactNode)()}
+          <span>{label}</span>
+          {suffix}
+        </Link>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  );
+}
+
+function NavSubItem({
+  path,
+  icon,
+  label,
+  basePath,
+  pathname,
+}: {
+  path: string;
+  icon: ReactNode;
+  label: string;
+  basePath: string;
+  pathname: string;
+}) {
+  const fullHref = `${basePath}${path}`;
+  const active = pathname === fullHref;
+
+  return (
+    <SidebarMenuSubItem>
+      <SidebarMenuSubButton asChild isActive={active}>
+        <Link href={fullHref}>
+          {icon}
+          <span>{label}</span>
+        </Link>
+      </SidebarMenuSubButton>
+    </SidebarMenuSubItem>
+  );
+}
+
+const ReviewIcon = (
+  <span className="flex size-3.5 items-center justify-center">
+    <span className="size-3 rounded-full border-2 border-current" />
+  </span>
+);
+
 export function BrandSidebar({ basePath = "" }: BrandSidebarProps) {
   const pathname = usePathname();
-
-  const href = (path: string) => `${basePath}${path}`;
-  const isActive = (path: string) => pathname === href(path);
+  const nav = { basePath, pathname };
 
   return (
     <Sidebar variant="sidebar" collapsible="icon" className="!top-16 !h-[calc(100svh-4rem)] [&_[data-slot=sidebar-inner]]:bg-background [&_[data-active=true]]:bg-foreground/10">
@@ -58,30 +130,9 @@ export function BrandSidebar({ basePath = "" }: BrandSidebarProps) {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === (basePath || "/")} tooltip="Home">
-                  <Link href={basePath || "/"}>
-                    <Home className="size-4" />
-                    <span>Home</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/analytics")} tooltip="Analytics">
-                  <Link href={href("/analytics")}>
-                    <BarChart2 className="size-4" />
-                    <span>Analytics</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/brand-configuration")} tooltip="Brand Configuration">
-                  <Link href={href("/brand-configuration")}>
-                    <SlidersHorizontal className="size-4" />
-                    <span>Brand Configuration</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <NavItem path="/" icon={Home} label="Home" {...nav} />
+              <NavItem path="/analytics" icon={BarChart2} label="Analytics" {...nav} />
+              <NavItem path="/brand-configuration" icon={SlidersHorizontal} label="Brand Configuration" {...nav} />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -104,24 +155,8 @@ export function BrandSidebar({ basePath = "" }: BrandSidebarProps) {
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenuSub>
-                      <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild isActive={isActive("/marketplace/listings")}>
-                          <Link href={href("/marketplace/listings")}>
-                            <ListChecks className="size-3.5" />
-                            <span>Listings</span>
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                      <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild isActive={isActive("/marketplace/review")}>
-                          <Link href={href("/marketplace/review")}>
-                            <span className="flex size-3.5 items-center justify-center">
-                              <span className="size-3 rounded-full border-2 border-current" />
-                            </span>
-                            <span>Review Needed</span>
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
+                      <NavSubItem path="/marketplace/listings" icon={<ListChecks className="size-3.5" />} label="Listings" {...nav} />
+                      <NavSubItem path="/marketplace/review" icon={ReviewIcon} label="Review Needed" {...nav} />
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </SidebarMenuItem>
@@ -138,53 +173,16 @@ export function BrandSidebar({ basePath = "" }: BrandSidebarProps) {
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenuSub>
-                      <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild isActive={isActive("/social-media/listings")}>
-                          <Link href={href("/social-media/listings")}>
-                            <ListChecks className="size-3.5" />
-                            <span>Listings</span>
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                      <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild isActive={isActive("/social-media/review")}>
-                          <Link href={href("/social-media/review")}>
-                            <span className="flex size-3.5 items-center justify-center">
-                              <span className="size-3 rounded-full border-2 border-current" />
-                            </span>
-                            <span>Review Needed</span>
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
+                      <NavSubItem path="/social-media/listings" icon={<ListChecks className="size-3.5" />} label="Listings" {...nav} />
+                      <NavSubItem path="/social-media/review" icon={ReviewIcon} label="Review Needed" {...nav} />
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </SidebarMenuItem>
               </Collapsible>
 
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/website-content")} tooltip="Website Content">
-                  <Link href={href("/website-content")}>
-                    <Globe className="size-4" />
-                    <span>Website Content</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/domain-names")} tooltip="Domain Names">
-                  <Link href={href("/domain-names")}>
-                    <Link2 className="size-4" />
-                    <span>Domain Names</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/paid-ads")} tooltip="Paid Ads">
-                  <Link href={href("/paid-ads")}>
-                    <Megaphone className="size-4" />
-                    <span>Paid Ads</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <NavItem path="/website-content" icon={Globe} label="Website Content" {...nav} />
+              <NavItem path="/domain-names" icon={Link2} label="Domain Names" {...nav} />
+              <NavItem path="/paid-ads" icon={Megaphone} label="Paid Ads" {...nav} />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -196,26 +194,19 @@ export function BrandSidebar({ basePath = "" }: BrandSidebarProps) {
           <SidebarGroupLabel>Intelligence</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Price Monitoring" className="text-muted-foreground">
-                  <Link href={href("/price-monitoring")}>
-                    <TrendingUp className="size-4" />
-                    <span>Price Monitoring</span>
-                    <Lock className="ml-auto size-3.5" />
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Risk Intelligence" className="text-muted-foreground">
-                  <Link href={href("/risk-intelligence")}>
-                    <span className="flex size-4 items-center justify-center">
-                      <span className="size-3 rounded-full border-2 border-current" />
-                    </span>
-                    <span>Risk Intelligence</span>
-                    <Lock className="ml-auto size-3.5" />
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <NavItem path="/price-monitoring" icon={TrendingUp} label="Price Monitoring" locked suffix={<Lock className="ml-auto size-3.5" />} {...nav} />
+              <NavItem
+                path="/risk-intelligence"
+                icon={() => (
+                  <span className="flex size-4 items-center justify-center">
+                    <span className="size-3 rounded-full border-2 border-current" />
+                  </span>
+                )}
+                label="Risk Intelligence"
+                locked
+                suffix={<Lock className="ml-auto size-3.5" />}
+                {...nav}
+              />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -224,30 +215,9 @@ export function BrandSidebar({ basePath = "" }: BrandSidebarProps) {
       {/* Footer */}
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={isActive("/documentation")} tooltip="Documentation">
-              <Link href={href("/documentation")}>
-                <BookOpen className="size-4" />
-                <span>Documentation</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={isActive("/integrations")} tooltip="Integrations">
-              <Link href={href("/integrations")}>
-                <Puzzle className="size-4" />
-                <span>Integrations</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={isActive("/settings")} tooltip="Settings">
-              <Link href={href("/settings")}>
-                <Settings className="size-4" />
-                <span>Settings</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+          <NavItem path="/documentation" icon={BookOpen} label="Documentation" {...nav} />
+          <NavItem path="/integrations" icon={Puzzle} label="Integrations" {...nav} />
+          <NavItem path="/settings" icon={Settings} label="Settings" {...nav} />
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
