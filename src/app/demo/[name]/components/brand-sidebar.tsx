@@ -7,7 +7,7 @@ export const brandSidebar = {
     Default: (
       <SidebarProvider>
         <div className="relative flex min-h-[400px]">
-          <BrandSidebar />
+          <BrandSidebar basePath="/demo/brand-sidebar" />
         </div>
       </SidebarProvider>
     ),

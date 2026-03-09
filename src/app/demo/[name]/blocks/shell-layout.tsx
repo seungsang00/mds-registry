@@ -13,7 +13,7 @@ export default function ShellLayout({
   return (
     <SidebarProvider>
       <BrandHeader />
-      <BrandSidebar />
+      <BrandSidebar basePath="/demo/shell-layout" />
       <main className="flex w-full justify-center">
         <div className="container">{children}</div>
       </main>

@@ -41,8 +41,15 @@ import {
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 
-export function BrandSidebar() {
+interface BrandSidebarProps {
+  basePath?: string;
+}
+
+export function BrandSidebar({ basePath = "" }: BrandSidebarProps) {
   const pathname = usePathname();
+
+  const href = (path: string) => `${basePath}${path}`;
+  const isActive = (path: string) => pathname === href(path);
 
   return (
     <Sidebar variant="sidebar" collapsible="icon" className="!top-16 !h-[calc(100svh-4rem)] [&_[data-slot=sidebar-inner]]:bg-background [&_[data-active=true]]:bg-foreground/10">
@@ -52,24 +59,24 @@ export function BrandSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={pathname === "#"} tooltip="Home">
-                  <Link href="#">
+                <SidebarMenuButton asChild isActive={pathname === (basePath || "/")} tooltip="Home">
+                  <Link href={basePath || "/"}>
                     <Home className="size-4" />
                     <span>Home</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Analytics">
-                  <Link href="#analytics">
+                <SidebarMenuButton asChild isActive={isActive("/analytics")} tooltip="Analytics">
+                  <Link href={href("/analytics")}>
                     <BarChart2 className="size-4" />
                     <span>Analytics</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Brand Configuration">
-                  <Link href="#brand-configuration">
+                <SidebarMenuButton asChild isActive={isActive("/brand-configuration")} tooltip="Brand Configuration">
+                  <Link href={href("/brand-configuration")}>
                     <SlidersHorizontal className="size-4" />
                     <span>Brand Configuration</span>
                   </Link>
@@ -98,16 +105,16 @@ export function BrandSidebar() {
                   <CollapsibleContent>
                     <SidebarMenuSub>
                       <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild>
-                          <Link href="#marketplace-listings">
+                        <SidebarMenuSubButton asChild isActive={isActive("/marketplace/listings")}>
+                          <Link href={href("/marketplace/listings")}>
                             <ListChecks className="size-3.5" />
                             <span>Listings</span>
                           </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
                       <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild>
-                          <Link href="#marketplace-review">
+                        <SidebarMenuSubButton asChild isActive={isActive("/marketplace/review")}>
+                          <Link href={href("/marketplace/review")}>
                             <span className="flex size-3.5 items-center justify-center">
                               <span className="size-3 rounded-full border-2 border-current" />
                             </span>
@@ -132,16 +139,16 @@ export function BrandSidebar() {
                   <CollapsibleContent>
                     <SidebarMenuSub>
                       <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild>
-                          <Link href="#social-listings">
+                        <SidebarMenuSubButton asChild isActive={isActive("/social-media/listings")}>
+                          <Link href={href("/social-media/listings")}>
                             <ListChecks className="size-3.5" />
                             <span>Listings</span>
                           </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
                       <SidebarMenuSubItem>
-                        <SidebarMenuSubButton asChild>
-                          <Link href="#social-review">
+                        <SidebarMenuSubButton asChild isActive={isActive("/social-media/review")}>
+                          <Link href={href("/social-media/review")}>
                             <span className="flex size-3.5 items-center justify-center">
                               <span className="size-3 rounded-full border-2 border-current" />
                             </span>
@@ -155,24 +162,24 @@ export function BrandSidebar() {
               </Collapsible>
 
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Website Content">
-                  <Link href="#website-content">
+                <SidebarMenuButton asChild isActive={isActive("/website-content")} tooltip="Website Content">
+                  <Link href={href("/website-content")}>
                     <Globe className="size-4" />
                     <span>Website Content</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Domain Names">
-                  <Link href="#domain-names">
+                <SidebarMenuButton asChild isActive={isActive("/domain-names")} tooltip="Domain Names">
+                  <Link href={href("/domain-names")}>
                     <Link2 className="size-4" />
                     <span>Domain Names</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Paid Ads">
-                  <Link href="#paid-ads">
+                <SidebarMenuButton asChild isActive={isActive("/paid-ads")} tooltip="Paid Ads">
+                  <Link href={href("/paid-ads")}>
                     <Megaphone className="size-4" />
                     <span>Paid Ads</span>
                   </Link>
@@ -191,7 +198,7 @@ export function BrandSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Price Monitoring" className="text-muted-foreground">
-                  <Link href="#price-monitoring">
+                  <Link href={href("/price-monitoring")}>
                     <TrendingUp className="size-4" />
                     <span>Price Monitoring</span>
                     <Lock className="ml-auto size-3.5" />
@@ -200,7 +207,7 @@ export function BrandSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Risk Intelligence" className="text-muted-foreground">
-                  <Link href="#risk-intelligence">
+                  <Link href={href("/risk-intelligence")}>
                     <span className="flex size-4 items-center justify-center">
                       <span className="size-3 rounded-full border-2 border-current" />
                     </span>
@@ -218,24 +225,24 @@ export function BrandSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Documentation">
-              <Link href="#documentation">
+            <SidebarMenuButton asChild isActive={isActive("/documentation")} tooltip="Documentation">
+              <Link href={href("/documentation")}>
                 <BookOpen className="size-4" />
                 <span>Documentation</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Integrations">
-              <Link href="#integrations">
+            <SidebarMenuButton asChild isActive={isActive("/integrations")} tooltip="Integrations">
+              <Link href={href("/integrations")}>
                 <Puzzle className="size-4" />
                 <span>Integrations</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Settings">
-              <Link href="#settings">
+            <SidebarMenuButton asChild isActive={isActive("/settings")} tooltip="Settings">
+              <Link href={href("/settings")}>
                 <Settings className="size-4" />
                 <span>Settings</span>
               </Link>
