@@ -20,7 +20,6 @@
       "type": "registry:component",
       "title": "MDS Toggle",
       "description": "Toggle switch component with small and medium sizes, supporting labels and disabled state.",
-      "dependencies": ["lucide-react"],
       "files": [
         {
           "path": "registry/new-york/ui/mds-toggle.tsx",

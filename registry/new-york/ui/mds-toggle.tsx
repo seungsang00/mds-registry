@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { Check, Circle } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const TOGGLE_CONFIG = {
@@ -102,11 +101,18 @@ const MDSToggle = React.forwardRef<HTMLLabelElement, MDSToggleProps>(
                 value ? "opacity-100" : "opacity-0"
               )}
             >
-              <Check
-                size={config.iconSize}
+              <svg
+                width={config.iconSize}
+                height={config.iconSize}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
                 strokeWidth={3}
-                className="text-current"
-              />
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
             </div>
             <div
               className={cn(
@@ -114,11 +120,18 @@ const MDSToggle = React.forwardRef<HTMLLabelElement, MDSToggleProps>(
                 !value ? "opacity-100" : "opacity-0"
               )}
             >
-              <Circle
-                size={config.iconSize}
+              <svg
+                width={config.iconSize}
+                height={config.iconSize}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
                 strokeWidth={3}
-                className="text-current"
-              />
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+              </svg>
             </div>
           </div>
         </div>
